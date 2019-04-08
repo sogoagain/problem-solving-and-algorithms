@@ -30,3 +30,5 @@
 
 ### hackerrank
 
+- [The HackerRank Interview Preparation Kit](https://github.com/sogoagain/Problem-Solving-and-Algorithms/tree/master/hackerrank/interview-preparation-kit)
+1. [Warm-up Challenges](https://github.com/sogoagain/Problem-Solving-and-Algorithms/tree/master/hackerrank/interview-preparation-kit/01_Warm-upChallenges)
