@@ -19,6 +19,12 @@
 
 ### programmers
 
+- [programmers 알고리즘 문제 풀이](https://github.com/sogoagain/Problem-Solving-and-Algorithms/tree/master/programmers)
+1. [해시](https://github.com/sogoagain/Problem-Solving-and-Algorithms/tree/master/programmers/01_Hash)
+2. [스택/큐](https://github.com/sogoagain/Problem-Solving-and-Algorithms/tree/master/programmers/02_StackQueue)
+3. [힙(Heap)](https://github.com/sogoagain/Problem-Solving-and-Algorithms/tree/master/programmers/03_Heap)
+4. [정렬](https://github.com/sogoagain/Problem-Solving-and-Algorithms/tree/master/programmers/04_Sort)
+5. [완전탐색](https://github.com/sogoagain/Problem-Solving-and-Algorithms/tree/master/programmers/05_ExhaustiveSearch)
 
 <a name="hackerrank">
 
