@@ -10,8 +10,19 @@ public class JoyStick {
 
         setStepsOfAlphabet(name, stepsOfVertical);
 
-        return 0;
+        int index = 0;
+        int stepOfVertical = 0;
+        int stepOfHorizon = 0;
+        while(isWritten(stepsOfVertical)) {
+            int nextStepOfHorizon = findNextStep(index, stepsOfVertical);
+            stepOfHorizon += Math.abs(nextStepOfHorizon);
+            index = mod(index + mod(nextStepOfHorizon, stepsOfVertical.size()), stepsOfVertical.size());
 
+            stepOfVertical += stepsOfVertical.get(index);
+            stepsOfVertical.set(index, 0);
+        }
+
+        return stepOfHorizon + stepOfVertical;
     }
 
     private int findNextStep(int index, List<Integer> stepsOfVertical) {
