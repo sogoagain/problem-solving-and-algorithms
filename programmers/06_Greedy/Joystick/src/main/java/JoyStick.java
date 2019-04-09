@@ -4,43 +4,37 @@ import java.util.List;
 public class JoyStick {
 
     private static final int NUMBER_OF_ALPHABETS = 26;
-    private int index = 0;
 
     public int writeName(String name) {
-        // List에 name으로 주어진 각 알파벳을 A로 부터 얼마나 가야할 지 저장.
-        System.out.println(-1 % 6);
         List<Integer> stepsOfVertical = new ArrayList<>();
 
         setStepsOfAlphabet(name, stepsOfVertical);
 
-        int index = 0;
-        int stepOfVertical = 0;
-        int stepOfHorizon = 0;
-        while(isWritten(stepsOfVertical)) {
-            stepOfVertical += stepsOfVertical.get(index);
-            stepsOfVertical.set(index, 0);
+        return 0;
 
-            int nextStepOfHorizon = findNextStep(index, stepsOfVertical);
-            stepOfHorizon += Math.abs(nextStepOfHorizon);
-
-            index = index + nextStepOfHorizon % stepsOfVertical.size();
-        }
-
-        return stepOfHorizon + stepOfVertical;
     }
 
     private int findNextStep(int index, List<Integer> stepsOfVertical) {
         int left = 0;
         int right = 0;
 
-        while (stepsOfVertical.get((index + left) % stepsOfVertical.size()) == 0
-                || stepsOfVertical.get((index + right) % stepsOfVertical.size()) == 0) {
+        for (int i = 0; i < stepsOfVertical.size(); i++) {
+            if (stepsOfVertical.get(mod((index + left), stepsOfVertical.size())) != 0) {
+                return left;
+            }
+
+            if (stepsOfVertical.get(mod((index + right), stepsOfVertical.size())) != 0) {
+                return right;
+            }
+
             left--;
             right++;
         }
+        return 0;
+    }
 
-
-        return Math.abs(left) <= right ? left : right;
+    private int mod(int a, int b) {
+        return Math.floorMod(a, b);
     }
 
     private boolean isWritten(List<Integer> stepsOfVertical) {
