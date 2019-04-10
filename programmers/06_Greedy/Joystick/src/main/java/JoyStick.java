@@ -6,61 +6,59 @@ public class JoyStick {
     private static final int NUMBER_OF_ALPHABETS = 26;
 
     public int writeName(String name) {
-        List<Integer> stepsOfVertical = new ArrayList<>();
+        List<Integer> alphabets = new ArrayList<>();
+        setStepsOfAlphabet(name, alphabets);
 
-        setStepsOfAlphabet(name, stepsOfVertical);
+        int stepOfVertical = alphabets.stream().mapToInt(i -> i).sum();
+        int stepOfHorizon = moveLeftRight(alphabets, 0);
 
-        int index = 0;
-        int stepOfVertical = 0;
-        int stepOfHorizon = 0;
-        while(isWritten(stepsOfVertical)) {
-            int nextStepOfHorizon = findNextStep(index, stepsOfVertical);
-            stepOfHorizon += Math.abs(nextStepOfHorizon);
-            index = mod(index + mod(nextStepOfHorizon, stepsOfVertical.size()), stepsOfVertical.size());
+        return stepOfVertical + stepOfHorizon;
+    }
 
-            stepOfVertical += stepsOfVertical.get(index);
-            stepsOfVertical.set(index, 0);
+    private int moveLeftRight(List<Integer> alphabets, int index) {
+        if (alphabets.stream().mapToInt(i -> i).sum() == 0) {
+            return 0;
         }
 
-        return stepOfHorizon + stepOfVertical;
-    }
+        List<Integer> alphabetsMovingLeft = new ArrayList<>(alphabets);
+        List<Integer> alphabetsMovingRight = new ArrayList<>(alphabets);
 
-    private int findNextStep(int index, List<Integer> stepsOfVertical) {
-        int left = 0;
-        int right = 0;
+        int leftStep = 0;
+        int rightStep = 0;
+        int newIndex = 0;
 
-        for (int i = 0; i < stepsOfVertical.size(); i++) {
-            if (stepsOfVertical.get(mod((index + left), stepsOfVertical.size())) != 0) {
-                return left;
-            }
-
-            if (stepsOfVertical.get(mod((index + right), stepsOfVertical.size())) != 0) {
-                return right;
-            }
-
-            left--;
-            right++;
+        for (int i = 0; i < alphabets.size(); i++) {
+            newIndex = Math.floorMod(index - leftStep, alphabets.size());
+            if (checkIndex(newIndex, alphabetsMovingLeft)) break;
+            leftStep++;
         }
-        return 0;
+
+        leftStep = leftStep + moveLeftRight(alphabetsMovingLeft, newIndex);
+
+        for (int i = 0; i < alphabets.size(); i++) {
+            newIndex = Math.floorMod(index + rightStep, alphabets.size());
+            if (checkIndex(newIndex, alphabetsMovingRight)) break;
+            rightStep++;
+        }
+
+        rightStep = rightStep + moveLeftRight(alphabetsMovingRight, newIndex);
+
+        return (leftStep < rightStep) ? leftStep : rightStep;
     }
 
-    private int mod(int a, int b) {
-        return Math.floorMod(a, b);
+    private boolean checkIndex(int index, List<Integer> alphabets) {
+        if (alphabets.get(index) != 0) {
+            alphabets.set(index, 0);
+            return true;
+        }
+        return false;
     }
 
-    private boolean isWritten(List<Integer> stepsOfVertical) {
-        return getSum(stepsOfVertical) != 0;
-    }
-
-    private int getSum(List<Integer> stepsOfVertical) {
-        return stepsOfVertical.stream().mapToInt(i -> i).sum();
-    }
-
-    private void setStepsOfAlphabet(String name, List<Integer> stepsOfVertical) {
+    private void setStepsOfAlphabet(String name, List<Integer> alphabets) {
         for (int i = 0; i < name.length(); i++) {
             int alphabet = (int) name.charAt(i) - 'A';
             int step = alphabet <= NUMBER_OF_ALPHABETS - alphabet ? alphabet : NUMBER_OF_ALPHABETS - alphabet;
-            stepsOfVertical.add(step);
+            alphabets.add(step);
         }
     }
 }
