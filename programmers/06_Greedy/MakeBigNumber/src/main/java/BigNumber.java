@@ -1,39 +1,37 @@
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Stack;
 
 public class BigNumber {
-    public String getBigNumber(String number, int k) {
-        List<Integer> numbers = new LinkedList<>();
+    public String getBigNumber(String number, int k)  {
         Stack<Integer> result = new Stack<>();
         StringBuilder stringBuilder = new StringBuilder();
 
         for (int i = 0; i < number.length(); i++) {
-            numbers.add(Character.getNumericValue(number.charAt(i)));
-        }
+            int num = Character.getNumericValue(number.charAt(i));
 
-        for (int i = 0; i < number.length(); i++) {
-
-            if (i - result.size() == k) {
-                result.push(numbers.get(i));
+            if (i - result.size() ==  k) {
+                result.push(num);
                 continue;
             }
 
             if (result.isEmpty()) {
-                result.push(numbers.get(i));
+                result.push(num);
                 continue;
             }
 
-            if (result.peek() > numbers.get(i)) {
-                result.push(numbers.get(i));
+            if (result.peek() > num) {
+                result.push(num);
                 continue;
             }
 
-            while (!result.isEmpty() && result.peek() < numbers.get(i) && i - result.size() != k) {
+            while (!result.isEmpty() && result.peek() < num && i - result.size() !=  k) {
                 result.pop();
             }
 
-            result.push(numbers.get(i));
+            result.push(num);
+        }
+
+        while (result.size() > number.length() - k) {
+            result.pop();
         }
 
         for (int num :
