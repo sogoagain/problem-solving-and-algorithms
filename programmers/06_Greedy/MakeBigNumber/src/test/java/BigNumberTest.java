@@ -29,4 +29,12 @@ public class BigNumberTest {
 
         assertThat(bigNumber.getBigNumber(number, k)).isEqualTo("775841");
     }
+
+    @Test
+    public void test_4thCase() throws Exception {
+        String number = "999999999";
+        int k = 3;
+
+        assertThat(bigNumber.getBigNumber(number, k)).isEqualTo("999999");
+    }
 }
