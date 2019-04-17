@@ -25,6 +25,7 @@
 3. [힙(Heap)](https://github.com/sogoagain/Problem-Solving-and-Algorithms/tree/master/programmers/03_Heap)
 4. [정렬](https://github.com/sogoagain/Problem-Solving-and-Algorithms/tree/master/programmers/04_Sort)
 5. [완전탐색](https://github.com/sogoagain/Problem-Solving-and-Algorithms/tree/master/programmers/05_ExhaustiveSearch)
+6. [Greedy](https://github.com/sogoagain/Problem-Solving-and-Algorithms/tree/master/programmers/06_Greedy)
 
 <a name="hackerrank">
 
