@@ -19,4 +19,11 @@ public class LifeboatTest {
         int limit = 100;
         assertThat(lifeboat.takeBoat(people, limit)).isEqualTo(3);
     }
+
+    @Test
+    public void test_3rdCase() throws Exception {
+        int[] people = {10, 20, 30, 40, 50, 60, 70, 80, 90};
+        int limit = 100;
+        assertThat(lifeboat.takeBoat(people, limit)).isEqualTo(5);
+    }
 }

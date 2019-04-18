@@ -7,24 +7,24 @@ public class Lifeboat {
                 .boxed()
                 .sorted(Comparator.reverseOrder())
                 .collect(Collectors.toList());
-        int boats = 1;
 
-        Iterator<Integer> iterator = peopleList.iterator();
+        int boats = 0;
+        int weight = 0;
+        int rightIndex = peopleList.size() - 1;
 
-        int totalWeight = 0;
-        while (!peopleList.isEmpty()) {
-            if (!iterator.hasNext()) {
-               iterator = peopleList.iterator();
-               totalWeight = 0;
-               boats++;
-               continue;
+        for (int i = 0; i <= rightIndex; i++) {
+            weight = peopleList.get(i);
+
+            for (int j = rightIndex; j > i; j--) {
+                int expectedWeight = weight + peopleList.get(j);
+                if (expectedWeight > limit) {
+                    break;
+                }
+                weight = expectedWeight;
+                rightIndex = j - 1;
             }
-
-            int person = iterator.next();
-            if (totalWeight + person <= limit) {
-                totalWeight += person;
-                iterator.remove();
-            }
+            weight = 0;
+            boats++;
         }
 
         return boats;
