@@ -1,15 +1,12 @@
 def sublist_max(profits):
-    max_profits = []
+    max_profit = profits[0]
     for i in range(len(profits)):
-        max_profit = profits[i]
+        profit = profits[i]
         for j in range(i + 1, len(profits)):
-            if max_profit < max_profit + profits[j]:
-                max_profit += profits[j]
+            profit += profits[j]
+            max_profit = max(max_profit, profit)
 
-        max_profits.append(max_profit)
-
-    max_profits.sort(reverse=True)
-    return max_profits[0]
+    return max_profit
 
 
 # 테스트
