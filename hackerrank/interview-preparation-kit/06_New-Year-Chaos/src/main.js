@@ -44,8 +44,6 @@ function main() {
     const t = parseInt(readLine(), 10);
 
     for (let tItr = 0; tItr < t; tItr++) {
-        const n = parseInt(readLine(), 10);
-
         const q = readLine().split(' ').map(qTemp => parseInt(qTemp, 10));
 
         const result = minimumBribes(q);
