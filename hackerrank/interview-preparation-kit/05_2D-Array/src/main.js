@@ -76,3 +76,5 @@ function main() {
 
     ws.end();
 }
+
+module.exports = hourglassSum;
